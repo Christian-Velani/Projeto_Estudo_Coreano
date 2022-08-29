@@ -129,7 +129,11 @@ def exercicio_texto(idioma, tipo):
 def exercicio_audio(idioma, tipo):
     exercicio = gerar_exercicio(tipo)
     ps.playsound(exercicio.audio)
-    escolha = int(input('Escolha:\n1- Ouvir de Novo\n 2- Responder\nEscolha: '))
+    escolha = int(input('''
+    Escolha:
+    1- Ouvir de Novo
+    2- Responder
+    Escolha: '''))
     if escolha == 1:
         ps.playsound(exercicio.audio)
     elif escolha == 2:
