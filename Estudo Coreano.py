@@ -39,9 +39,9 @@ def menu_secundario(idioma):
         ''')
     tipo = int(input('Escolha: '))
     if tipo == 1:
-        menu_final(idioma, "Palavras")
+        menu_final(idioma, "Palavra")
     elif tipo == 2:
-        menu_final(idioma, 'Frases')
+        menu_final(idioma, 'Frase')
     elif tipo == 3:
         mostrar_menu()
 
@@ -72,6 +72,7 @@ def adicionar_frase():
 def adicionar_ao_banco(coreano, portugues, tipo):
     conexao = Conectar.conectar()
     cursor = conexao.cursor()
+    tipo = tipo + 's'
     if coreano != None and portugues != None:
         coreano = " ".join(coreano.strip().split())
         portugues = " ".join(coreano.strip().split())
@@ -88,22 +89,14 @@ def adicionar_ao_banco(coreano, portugues, tipo):
 def gerar_exercicio(tipo):
     conexao = Conectar.conectar()
     cursor = conexao.cursor()
-    cursor.execute(f'SELECT COUNT(*) FROM {tipo}')
+    tabela = tipo + 's'
+    cursor.execute(f'SELECT COUNT(*) FROM {tabela}')
     quantidade = cursor.fetchone()
-    if tipo == 'Palavras':
-        numero = rm.randint(1, quantidade[0])
-        print(numero)
-        cursor.execute(f'SELECT COREANO, PORTUGUÊS FROM PALAVRAS WHERE ID = {numero}')
-        valores = cursor.fetchone()
-        audio = 'Audios/' + 'palavra'+ '_' + str(numero) + '.mp3'
-        print(audio)
-        exercicio = Exercicio(valores[0], valores[1], audio)
-    elif tipo == 'Frases':
-        numero = rm.randint(1, quantidade[0])
-        cursor.execute(f'SELECT COREANO, PORTUGUÊS FROM FRASES WHERE ID = {numero}')
-        valores = cursor.fetchone()
-        audio = 'Audios/' + 'frase_' + str(numero) + '.mp3'
-        exercicio = Exercicio(valores[0], valores[1], audio)
+    numero = rm.randint(1, quantidade[0])
+    cursor.execute(f'SELECT COREANO, PORTUGUÊS FROM {tabela} WHERE ID = {numero}')
+    valores = cursor.fetchone()
+    audio = 'Audios/' + tipo + '_' + str(numero) + '.mp3'
+    exercicio = Exercicio(valores[0], valores[1], audio)
     return exercicio
 
 def exercicio_texto(idioma, tipo):
