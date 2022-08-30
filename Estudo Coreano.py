@@ -62,12 +62,12 @@ def menu_final(idioma, tipo):
 def adicionar_palavra():
     palavra_coreano = input('Palavra em Coreano a ser adicionada: ')
     palavra_portugues = input('Tradução da Palavra: ')
-    adicionar_ao_banco(palavra_coreano, palavra_portugues, 'Palavras')
+    adicionar_ao_banco(palavra_coreano, palavra_portugues, 'Palavra')
 
 def adicionar_frase():
     frase_coreano = input('Frase em Coreano a ser adicionada: ')
-    frase_portugues = input('Frase da Palavra: ')
-    adicionar_ao_banco(frase_coreano, frase_portugues, 'Frases')
+    frase_portugues = input('Tradução da Frase: ')
+    adicionar_ao_banco(frase_coreano, frase_portugues, 'Frase')
 
 def adicionar_ao_banco(coreano, portugues, tipo):
     conexao = Conectar.conectar()
@@ -75,7 +75,7 @@ def adicionar_ao_banco(coreano, portugues, tipo):
     tipo = tipo + 's'
     if coreano != None and portugues != None:
         coreano = " ".join(coreano.strip().split())
-        portugues = " ".join(coreano.strip().split())
+        portugues = " ".join(portugues.strip().split())
         cursor.execute(f'INSERT INTO {tipo} VALUES(NULL, "{coreano}", "{portugues}")')
         conexao.commit()
     else:
