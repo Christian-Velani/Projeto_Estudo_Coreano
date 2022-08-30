@@ -72,8 +72,10 @@ def adicionar_frase():
 def adicionar_ao_banco(coreano, portugues, tipo):
     conexao = Conectar.conectar()
     cursor = conexao.cursor()
-    cursor.execute(f'INSERT INTO {tipo} VALUES(NULL, "{coreano}", "{portugues}")')
     if coreano != None and portugues != None:
+        coreano = " ".join(coreano.strip().split())
+        portugues = " ".join(coreano.strip().split())
+        cursor.execute(f'INSERT INTO {tipo} VALUES(NULL, "{coreano}", "{portugues}")')
         conexao.commit()
     else:
         print('Alguma informação estava incorreta')
