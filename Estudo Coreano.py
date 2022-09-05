@@ -20,9 +20,13 @@ def mostrar_menu():
         ''')
     try:
         menu = int(input('Escolha: '))
+        if menu >= 1 and menu <= 7:
+            encaminhar_menu(menu)
+        else:
+            raise ValueError
     except ValueError:
+        print('Valor Inválido')
         mostrar_menu()
-    encaminhar_menu(menu)
 
 def encaminhar_menu(menu):
     if menu == 1:
@@ -46,13 +50,20 @@ def menu_secundario(idioma):
         2 - Frase
         3 - Retornar para o Menu Principal
         ''')
-    tipo = int(input('Escolha: '))
-    if tipo == 1:
-        menu_final(idioma, "Palavra")
-    elif tipo == 2:
-        menu_final(idioma, 'Frase')
-    elif tipo == 3:
-        mostrar_menu()
+    try:
+        tipo = int(input('Escolha: '))
+        if tipo >= 1 and tipo <= 3:
+            if tipo == 1:
+                menu_final(idioma, "Palavra")
+            elif tipo == 2:
+                menu_final(idioma, 'Frase')
+            elif tipo == 3:
+                mostrar_menu()
+        else:
+            raise ValueError
+    except ValueError:
+        print('Valor inválido')
+        menu_secundario(idioma)
 
 def menu_final(idioma, tipo):
     print('''
@@ -60,13 +71,20 @@ def menu_final(idioma, tipo):
         2 - Aúdio
         3 - Voltar
         ''')
-    tipo2 = int(input('Escolha: '))
-    if tipo2 == 1:
-        exercicio_texto(idioma, tipo)
-    elif tipo2 == 2:
-        exercicio_audio(idioma, tipo)
-    elif tipo2 == 3:
-        menu_secundario(idioma)
+    try:
+        tipo2 = int(input('Escolha: '))
+        if tipo2 >= 1 and tipo2 <= 3:
+            if tipo2 == 1:
+                exercicio_texto(idioma, tipo)
+            elif tipo2 == 2:
+                exercicio_audio(idioma, tipo)
+            elif tipo2 == 3:
+                menu_secundario(idioma)
+        else:
+            raise ValueError
+    except ValueError:
+        print('Valor Inválido')
+        menu_final(idioma, tipo)
 
 def adicionar_palavra():
     palavra_coreano = input('Palavra em Coreano a ser adicionada: ')
@@ -135,32 +153,39 @@ def exercicio_texto(idioma, tipo):
 def exercicio_audio(idioma, tipo):
     exercicio = gerar_exercicio(tipo)
     ps.playsound(exercicio.audio)
-    escolha = int(input('''
-    Escolha:
-    1- Ouvir de Novo
-    2- Responder
-    Escolha: '''))
-    if escolha == 1:
-        ps.playsound(exercicio.audio)
-    elif escolha == 2:
-        resposta = input('Resposta: ')
-    if idioma == 'Coreano':
-        resposta = " ".join(resposta.strip().split())
-        if resposta == exercicio.texto_portugues:
-            print('Resposta Certa')
-            salvar(idioma, tipo, 'Aúdio', exercicio.texto_coreano, exercicio.texto_portugues, resposta, 'Acerto')
+    try:
+        escolha = int(input('''
+        Escolha:
+        1- Ouvir de Novo
+        2- Responder
+        Escolha: '''))
+        if escolha >= 1 and escolha <= 2:
+            if escolha == 1:
+                ps.playsound(exercicio.audio)
+                resposta = input('Resposta: ')
+            elif escolha == 2:
+                resposta = input('Resposta: ')
+            if idioma == 'Coreano':
+                resposta = " ".join(resposta.strip().split())
+                if resposta == exercicio.texto_portugues:
+                    print('Resposta Certa')
+                    salvar(idioma, tipo, 'Aúdio', exercicio.texto_coreano, exercicio.texto_portugues, resposta, 'Acerto')
+                else:
+                    print(f'Resposta Errada\nA resposta certa seria {exercicio.texto_portugues}\n Resposta dada: {resposta}')
+                    salvar(idioma, tipo, 'Aúdio', exercicio.texto_coreano, exercicio.texto_portugues, resposta, 'Erro')
+            if idioma == 'Portugues':
+                resposta = " ".join(resposta.strip().split())
+                if resposta == exercicio.texto_coreano:
+                    print('Resposta Certa')
+                    salvar(idioma, tipo, 'Aúdio', exercicio.texto_coreano, exercicio.texto_portugues, resposta, 'Acerto')
+                else:
+                    print(f'Resposta Errada\nA resposta certa seria {exercicio.texto_coreano}\n Resposta dada: {resposta}')
+                    salvar(idioma, tipo, 'Aúdio', exercicio.texto_coreano, exercicio.texto_portugues, resposta, 'Erro')   
+            menu_final(idioma, tipo)
         else:
-            print(f'Resposta Errada\nA resposta certa seria {exercicio.texto_portugues}\n Resposta dada: {resposta}')
-            salvar(idioma, tipo, 'Aúdio', exercicio.texto_coreano, exercicio.texto_portugues, resposta, 'Erro')
-    if idioma == 'Portugues':
-        resposta = " ".join(resposta.strip().split())
-        if resposta == exercicio.texto_coreano:
-            print('Resposta Certa')
-            salvar(idioma, tipo, 'Aúdio', exercicio.texto_coreano, exercicio.texto_portugues, resposta, 'Acerto')
-        else:
-            print(f'Resposta Errada\nA resposta certa seria {exercicio.texto_coreano}\n Resposta dada: {resposta}')
-            salvar(idioma, tipo, 'Aúdio', exercicio.texto_coreano, exercicio.texto_portugues, resposta, 'Erro')   
-    menu_final(idioma, tipo)
+            raise ValueError
+    except ValueError:
+        exercicio_audio(idioma, tipo)
 
 def salvar(idioma, frase_palavra, tipo_exercicio, coreano, portugues, resposta, resultado):
     conexao = Conectar.conectar()
@@ -183,7 +208,7 @@ def resetar_resultados():
     cursor = conexao.cursor()
     cursor.execute('DROP TABLE RESULTADOS')
     conexao.commit()
-    cursor.excute('''
+    cursor.execute('''
     CREATE TABLE RESULTADOS(
     ID INT PRIMARY KEY AUTO_INCREMENT,
     IDIOMA VARCHAR(255) NOT NULL,
@@ -193,6 +218,8 @@ def resetar_resultados():
     PORTUGUÊS VARCHAR(255) NOT NULL,
     RESPOSTA VARCHAR(255) NOT NULL,
     RESULTADO VARCHAR(255) NOT NULL
-)''')
+    )''')
+    conexao.commit()
+    mostrar_menu()
 
 mostrar_menu()
