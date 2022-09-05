@@ -150,8 +150,11 @@ def exercicio_texto(idioma, tipo):
             salvar(idioma, tipo, 'Texto', exercicio.texto_coreano, exercicio.texto_portugues, resposta, 'Erro')   
     menu_final(idioma, tipo)
 
-def exercicio_audio(idioma, tipo):
-    exercicio = gerar_exercicio(tipo)
+def exercicio_audio(idioma = None, tipo = None, exerciciore = None):
+    if exerciciore == None:
+        exercicio = gerar_exercicio(tipo)
+    else:
+        exercicio = exerciciore
     ps.playsound(exercicio.audio)
     try:
         escolha = int(input('''
@@ -161,8 +164,7 @@ def exercicio_audio(idioma, tipo):
         Escolha: '''))
         if escolha >= 1 and escolha <= 2:
             if escolha == 1:
-                ps.playsound(exercicio.audio)
-                resposta = input('Resposta: ')
+                exercicio_audio(idioma, tipo, exercicio)
             elif escolha == 2:
                 resposta = input('Resposta: ')
             if idioma == 'Coreano':
@@ -185,7 +187,8 @@ def exercicio_audio(idioma, tipo):
         else:
             raise ValueError
     except ValueError:
-        exercicio_audio(idioma, tipo)
+        print('Valor Inválido')
+        exercicio_audio(idioma, tipo, exercicio)
 
 def salvar(idioma, frase_palavra, tipo_exercicio, coreano, portugues, resposta, resultado):
     conexao = Conectar.conectar()
