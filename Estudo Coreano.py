@@ -18,7 +18,13 @@ def mostrar_menu():
         6 - Resetar Resultados
         7 - Sair
         ''')
-    menu = int(input('Escolha: '))
+    try:
+        menu = int(input('Escolha: '))
+    except ValueError:
+        mostrar_menu()
+    encaminhar_menu(menu)
+
+def encaminhar_menu(menu):
     if menu == 1:
         menu_secundario('Coreano')
     elif menu == 2:
@@ -33,7 +39,7 @@ def mostrar_menu():
         resetar_resultados()
     elif menu == 7:
         return -1
-
+        
 def menu_secundario(idioma):
     print('''
         1 - Palavra
