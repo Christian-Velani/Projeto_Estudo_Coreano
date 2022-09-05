@@ -104,6 +104,7 @@ def exercicio_texto(idioma, tipo):
     if idioma == 'Coreano':
         print(f'Traduza: {exercicio.texto_coreano}')
         resposta = input('Resposta: ')
+        resposta = " ".join(resposta.strip().split())
         if resposta == exercicio.texto_portugues:
             print('Resposta Certa')
             salvar(idioma, tipo, 'Texto', exercicio.texto_coreano, exercicio.texto_portugues, resposta, 'Acerto')
@@ -113,6 +114,7 @@ def exercicio_texto(idioma, tipo):
     elif idioma == 'Portugues':
         print(f'Traduza: {exercicio.texto_portugues}')
         resposta = input('Resposta: ')
+        resposta = " ".join(resposta.strip().split())
         if resposta == exercicio.texto_coreano:
             print('Resposta Certa')
             salvar(idioma, tipo, 'Texto', exercicio.texto_coreano, exercicio.texto_portugues, resposta, 'Acerto')
@@ -134,6 +136,7 @@ def exercicio_audio(idioma, tipo):
     elif escolha == 2:
         resposta = input('Resposta: ')
     if idioma == 'Coreano':
+        resposta = " ".join(resposta.strip().split())
         if resposta == exercicio.texto_portugues:
             print('Resposta Certa')
             salvar(idioma, tipo, 'Aúdio', exercicio.texto_coreano, exercicio.texto_portugues, resposta, 'Acerto')
@@ -142,6 +145,7 @@ def exercicio_audio(idioma, tipo):
             print(f'Resposta Errada\nA resposta certa seria {exercicio.texto_portugues}\n Resposta dada: {resposta}')
             salvar(idioma, tipo, 'Aúdio', exercicio.texto_coreano, exercicio.texto_portugues, resposta, 'Erro')
     if idioma == 'Portugues':
+        resposta = " ".join(resposta.strip().split())
         if resposta == exercicio.texto_coreano:
             print('Resposta Certa')
             salvar(idioma, tipo, 'Aúdio', exercicio.texto_coreano, exercicio.texto_portugues, resposta, 'Acerto')
@@ -163,6 +167,6 @@ def consultar_resultados():
     resultados = conexao.fetchall()
     print('Esses são seus resultados:')
     for resultado in resultados:
-        print(resultado[0], resultado[1], resultado[2], resultado[3], resultado[4], resultado[5], resultado[6])
+        print(f' Idioma: {resultado[0]}, Tipo: {resultado[1]}, Tipo de Exercicio: {resultado[2]}, Texto em Coreano: {resultado[3]}, Texto em Português: {resultado[4]}, Resposta: {resultado[5]}, Resultado: {resultado[6]}')
 
 mostrar_menu()
