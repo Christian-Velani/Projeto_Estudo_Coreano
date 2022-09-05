@@ -171,8 +171,8 @@ def salvar(idioma, frase_palavra, tipo_exercicio, coreano, portugues, resposta, 
 def consultar_resultados():
     conexao = Conectar.conectar()
     cursor = conexao.cursor()
-    cursor.execute('SELECT IDIOMA, FRASE_PALAVRA, TIPO_EXERCICIO, COREANO, PORTUGUES, RESPOSTA, RESULTADO FROM RESULTADOS')
-    resultados = conexao.fetchall()
+    cursor.execute('SELECT IDIOMA, FRASE_PALAVRA, TIPO_EXERCICIO, COREANO, PORTUGUÊS, RESPOSTA, RESULTADO FROM RESULTADOS')
+    resultados = cursor.fetchall()
     print('Esses são seus resultados:')
     for resultado in resultados:
         print(f' Idioma: {resultado[0]}, Tipo: {resultado[1]}, Tipo de Exercicio: {resultado[2]}, Texto em Coreano: {resultado[3]}, Texto em Português: {resultado[4]}, Resposta: {resultado[5]}, Resultado: {resultado[6]}')
