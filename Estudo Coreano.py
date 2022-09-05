@@ -150,7 +150,6 @@ def exercicio_audio(idioma, tipo):
             print('Resposta Certa')
             salvar(idioma, tipo, 'Aúdio', exercicio.texto_coreano, exercicio.texto_portugues, resposta, 'Acerto')
         else:
-            ps.playsound(exercicio_audio)
             print(f'Resposta Errada\nA resposta certa seria {exercicio.texto_portugues}\n Resposta dada: {resposta}')
             salvar(idioma, tipo, 'Aúdio', exercicio.texto_coreano, exercicio.texto_portugues, resposta, 'Erro')
     if idioma == 'Portugues':
