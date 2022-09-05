@@ -104,7 +104,7 @@ def gerar_exercicio(tipo):
     numero = rm.randint(1, quantidade[0])
     cursor.execute(f'SELECT COREANO, PORTUGUÊS FROM {tabela} WHERE ID = {numero}')
     valores = cursor.fetchone()
-    audio = 'Audios/' + tipo + '_' + str(numero) + '.mp3'
+    audio = 'Audios/' + tipo + ' (' + str(numero) + ')' + '.mp3'
     exercicio = Exercicio(valores[0], valores[1], audio)
     return exercicio
 
