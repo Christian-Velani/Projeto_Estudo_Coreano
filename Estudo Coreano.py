@@ -15,7 +15,8 @@ def mostrar_menu():
         3 - Adicionar Palavra
         4 - Adicionar Frase
         5 - Consultar Resultados
-        6 - Sair
+        6 - Resetar Resultados
+        7 - Sair
         ''')
     menu = int(input('Escolha: '))
     if menu == 1:
@@ -29,6 +30,8 @@ def mostrar_menu():
     elif menu == 5:
         consultar_resultados()
     elif menu == 6:
+        resetar_resultados()
+    elif menu == 7:
         return -1
 
 def menu_secundario(idioma):
@@ -168,5 +171,22 @@ def consultar_resultados():
     print('Esses são seus resultados:')
     for resultado in resultados:
         print(f' Idioma: {resultado[0]}, Tipo: {resultado[1]}, Tipo de Exercicio: {resultado[2]}, Texto em Coreano: {resultado[3]}, Texto em Português: {resultado[4]}, Resposta: {resultado[5]}, Resultado: {resultado[6]}')
+
+def resetar_resultados():
+    conexao = Conectar.conectar()
+    cursor = conexao.cursor()
+    cursor.execute('DROP TABLE RESULTADOS')
+    conexao.commit()
+    cursor.excute('''
+    CREATE TABLE RESULTADOS(
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    IDIOMA VARCHAR(255) NOT NULL,
+    FRASE_PALAVRA VARCHAR(255) NOT NULL,
+    TIPO_EXERCICIO VARCHAR(255) NOT NULL,
+    COREANO VARCHAR(255) NOT NULL,
+    PORTUGUÊS VARCHAR(255) NOT NULL,
+    RESPOSTA VARCHAR(255) NOT NULL,
+    RESULTADO VARCHAR(255) NOT NULL
+)''')
 
 mostrar_menu()
