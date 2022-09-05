@@ -38,8 +38,8 @@ def encaminhar_menu(menu):
     elif menu == 6:
         resetar_resultados()
     elif menu == 7:
-        return -1
-        
+        exit
+
 def menu_secundario(idioma):
     print('''
         1 - Palavra
