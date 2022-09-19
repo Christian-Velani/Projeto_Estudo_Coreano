@@ -199,7 +199,8 @@ def consultar_resultados():
     with open('resultados.txt', 'r', encoding="utf-8") as resultados:
         resultado = resultados.readlines()
         for resultad in resultado:
-            print(f' Idioma: {resultado[0]}, Tipo: {resultado[1]}, Tipo de Exercicio: {resultado[2]}, Texto em Coreano: {resultado[3]}, Texto em Português: {resultado[4]}, Resposta: {resultado[5]}, Resultado: {resultado[6]}')
+            idioma, tipo, tipo2, coreano, portugues, resposta, final = resultad.split('#')
+            print(f' Idioma: {idioma}, Tipo: {tipo}, Tipo de Exercicio: {tipo2}, Texto em Coreano: {coreano}, Texto em Português: {portugues}, Resposta: {resposta}, Resultado: {final}')
     mostrar_menu()
 
 mostrar_menu()
