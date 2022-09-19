@@ -10,6 +10,9 @@ class Exercicio:
 
 def mostrar_menu():
     print('''
+    --------------------------------------------------------
+    Menu:
+
         1 - Coreano
         2 - Português
         3 - Adicionar Palavra
@@ -17,6 +20,7 @@ def mostrar_menu():
         5 - Consultar Resultados
         6 - Resetar Resultados
         7 - Sair
+    --------------------------------------------------------
         ''')
     try:
         menu = int(input('Escolha: '))
@@ -46,9 +50,13 @@ def encaminhar_menu(menu):
 
 def menu_secundario(idioma):
     print('''
+    --------------------------------------------------------
+    Opções:
+
         1 - Palavra
         2 - Frase
         3 - Retornar para o Menu Principal
+    --------------------------------------------------------
         ''')
     try:
         tipo = int(input('Escolha: '))
@@ -67,9 +75,13 @@ def menu_secundario(idioma):
 
 def menu_final(idioma, tipo):
     print('''
+    --------------------------------------------------------
+    Opções:
+
         1 - Texto
         2 - Aúdio
         3 - Voltar
+    --------------------------------------------------------
         ''')
     try:
         tipo2 = int(input('Escolha: '))
@@ -171,10 +183,14 @@ def exercicio_audio(idioma = None, tipo = None, exerciciore = None):
     ps.playsound(exercicio.audio)
     try:
         escolha = int(input('''
-        Escolha:
-        1- Ouvir de Novo
-        2- Responder
-        Escolha: '''))
+        --------------------------------------------------------
+            Escolha:
+
+                1- Ouvir de Novo
+                2- Responder
+                
+            Escolha: 
+        --------------------------------------------------------'''))
         if escolha >= 1 and escolha <= 2:
             if escolha == 1:
                 exercicio_audio(idioma, tipo, exercicio)
@@ -216,7 +232,18 @@ def consultar_resultados():
         resultado = resultados.readlines()
         for resultad in resultado:
             idioma, tipo, tipo2, coreano, portugues, resposta, final = resultad.split('#')
-            print(f' Idioma: {idioma}, Tipo: {tipo}, Tipo de Exercicio: {tipo2}, Texto em Coreano: {coreano}, Texto em Português: {portugues}, Resposta: {resposta}, Resultado: {final}')
+            print(f'''
+            --------------------------------------------------------
+            |Idioma: {idioma}
+            |Tipo: {tipo}
+            |Tipo de Exercicio: {tipo2}
+            |Texto em Coreano: {coreano}
+            |Texto em Português: {portugues}
+            |Resposta: {resposta}
+            |Resultado: {final}
+            --------------------------------------------------------
+            ''')
+            input('Pressione ENTER para continuar')
     mostrar_menu()
 
 def resetar_resultados():
