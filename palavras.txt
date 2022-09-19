@@ -1,2 +1,7 @@
 한국 Coreia
 도시 Cidade
+이름 Nome
+저 Eu(formal)
+나 Eu(informal)
+남자 Homem
+여자 Mulher
