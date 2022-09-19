@@ -1,5 +1,6 @@
 import random as rm
 import playsound as ps
+import os
 
 class Exercicio:
     def __init__(self, texto_coreano, texto_portugues, audio = None):
@@ -14,6 +15,7 @@ def mostrar_menu():
         3 - Adicionar Palavra
         4 - Adicionar Frase
         5 - Consultar Resultados
+        6 - Resetar Resultados
         7 - Sair
         ''')
     try:
@@ -215,6 +217,10 @@ def consultar_resultados():
         for resultad in resultado:
             idioma, tipo, tipo2, coreano, portugues, resposta, final = resultad.split('#')
             print(f' Idioma: {idioma}, Tipo: {tipo}, Tipo de Exercicio: {tipo2}, Texto em Coreano: {coreano}, Texto em Português: {portugues}, Resposta: {resposta}, Resultado: {final}')
+    mostrar_menu()
+
+def resetar_resultados():
+    os.remove("resultados.txt")
     mostrar_menu()
 
 mostrar_menu()
