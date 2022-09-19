@@ -37,6 +37,8 @@ def encaminhar_menu(menu):
         adicionar_frase()
     elif menu == 5:
         consultar_resultados()
+    elif menu == 6:
+        resetar_resultados()
     elif menu == 7:
         exit
 
@@ -99,9 +101,17 @@ def adicionar_ao_arquivo(coreano, portugues, tipo):
         portugues = " ".join(portugues.strip().split())
         with open('palavras.txt', 'a+', encoding="utf-8") as palavras, open('frases.txt', 'a+', encoding="utf-8") as frases:
             if tipo == 'Palavras':
-                palavras.write(f'\n{coreano} {portugues}')
+                tamanho = len(palavras.readlines())
+                if tamanho == 0:
+                    palavras.write(f'{coreano} {portugues}')
+                else:
+                    palavras.write(f'\n{coreano} {portugues}')
             else:
-                frases.write(f'\n{coreano}#{portugues}')
+                tamanho = len(frases.readlines())
+                if tamanho == 0:
+                    frases.write(f'{coreano}#{portugues}')
+                else:
+                    frases.write(f'\n{coreano}#{portugues}')
     else:
         print('Alguma informação estava incorreta')
         if tipo == 'Palavras':
@@ -193,7 +203,11 @@ def exercicio_audio(idioma = None, tipo = None, exerciciore = None):
 
 def salvar(idioma, frase_palavra, tipo_exercicio, coreano, portugues, resposta, resultado):
     with open('resultados.txt', 'a+', encoding="utf-8") as resultados:
-        resultados.write(f'\n{idioma}#{frase_palavra}#{tipo_exercicio}#{coreano}#{portugues}#{resposta}#{resultado}')
+        tamanho = len(resultados.readlines())
+        if tamanho == 0:
+            resultados.write(f'{idioma}#{frase_palavra}#{tipo_exercicio}#{coreano}#{portugues}#{resposta}#{resultado}')
+        else:
+            resultados.write(f'\n{idioma}#{frase_palavra}#{tipo_exercicio}#{coreano}#{portugues}#{resposta}#{resultado}')
 
 def consultar_resultados():
     with open('resultados.txt', 'r', encoding="utf-8") as resultados:
