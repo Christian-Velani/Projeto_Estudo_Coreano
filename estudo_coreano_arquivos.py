@@ -119,7 +119,7 @@ def gerar_exercicio(tipo):
             numero = rm.randint(1, quantidade)
             coreano, portugues = p[numero-1].split()
         else:
-            fr = palavras.readlines()
+            fr = frases.readlines()
             quantidade = len(fr)
             numero = rm.randint(1, quantidade)
             coreano, portugues = fr[numero-1].split('#')
