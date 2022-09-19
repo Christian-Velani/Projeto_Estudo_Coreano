@@ -220,15 +220,15 @@ def consultar_resultados():
     print('Esses são seus resultados:')
     for resultado in resultados:
         print(f'''
-        --------------------------------------
-        |Idioma: {resultado[0]}              |
-        |Tipo: {resultado[1]}                |
-        |Tipo de Exercicio: {resultado[2]}   |
-        |Texto em Coreano: {resultado[3]}    |
-        |Texto em Português: {resultado[4]}  |
-        |Resposta: {resultado[5]}            |
-        |Resultado: {resultado[6]}           |
-        --------------------------------------
+        ----------------------------------------------------------
+        |Idioma: {resultado[0]}                                  
+        |Tipo: {resultado[1]}                                    
+        |Tipo de Exercicio: {resultado[2]}                       
+        |Texto em Coreano: {resultado[3]}                        
+        |Texto em Português: {resultado[4]}                      
+        |Resposta: {resultado[5]}                                
+        |Resultado: {resultado[6]}
+        ----------------------------------------------------------
         ''')
         input('Pressione enter para continuar')
     mostrar_menu()
