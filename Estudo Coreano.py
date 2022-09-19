@@ -144,7 +144,7 @@ def exercicio_texto(idioma, tipo):
         print(f'Traduza: {exercicio.texto_coreano}')
         resposta = input('Resposta: ')
         resposta = " ".join(resposta.strip().split())
-        if resposta == exercicio.texto_portugues:
+        if resposta.lower() == exercicio.texto_portugues.lower():
             print('Resposta Certa')
             salvar(idioma, tipo, 'Texto', exercicio.texto_coreano, exercicio.texto_portugues, resposta, 'Acerto')
         else:
@@ -154,7 +154,7 @@ def exercicio_texto(idioma, tipo):
         print(f'Traduza: {exercicio.texto_portugues}')
         resposta = input('Resposta: ')
         resposta = " ".join(resposta.strip().split())
-        if resposta == exercicio.texto_coreano:
+        if resposta.lower() == exercicio.texto_coreano.lower():
             print('Resposta Certa')
             salvar(idioma, tipo, 'Texto', exercicio.texto_coreano, exercicio.texto_portugues, resposta, 'Acerto')
         else:
@@ -185,7 +185,7 @@ def exercicio_audio(idioma = None, tipo = None, exerciciore = None):
                 resposta = input('Resposta: ')
             if idioma == 'Coreano':
                 resposta = " ".join(resposta.strip().split())
-                if resposta == exercicio.texto_portugues:
+                if resposta.lower() == exercicio.texto_portugues.lower():
                     print('Resposta Certa')
                     salvar(idioma, tipo, 'Aúdio', exercicio.texto_coreano, exercicio.texto_portugues, resposta, 'Acerto')
                 else:
@@ -193,7 +193,7 @@ def exercicio_audio(idioma = None, tipo = None, exerciciore = None):
                     salvar(idioma, tipo, 'Aúdio', exercicio.texto_coreano, exercicio.texto_portugues, resposta, 'Erro')
             if idioma == 'Portugues':
                 resposta = " ".join(resposta.strip().split())
-                if resposta == exercicio.texto_coreano:
+                if resposta.lower() == exercicio.texto_coreano.lower():
                     print('Resposta Certa')
                     salvar(idioma, tipo, 'Aúdio', exercicio.texto_coreano, exercicio.texto_portugues, resposta, 'Acerto')
                 else:
