@@ -1,0 +1,10 @@
+나는 여자야 / 저는 여자예요#Eu sou uma mulher
+나는 선생님이야 / 저는 선생님이에요#Eu sou um professor
+나는 사람이야 / 저는 사람이에요#Eu sou uma pessoa
+그 사람은 선생님이야 / 그 사람은 선생님이에요#Esta pessoa é um professor
+이것은 탁자야 / 이것은 탁자예요#Essa coisa é uma mesa
+저것은 침대야 / 저것은 침대예요#Esta coisa é uma cama
+그 사람은 남자야 / 그 사람은 남자예요#Esta pessoa é um homem
+그 사람은 여자야 / 그 사람은 여자예요#Esta pessoa é uma mulher
+그것은 차야 / 그것은 차예요#Esta coisa é um carro
+이것은 나무야 / 이것은 나무예요#Essa coisa é uma árvore
